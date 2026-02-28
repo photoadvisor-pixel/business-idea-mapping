@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>写真実践講座 ～人物・ポートレート撮影～</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #d4af37;
+            /* Gold for premium feel */
+            --accent-hover: #b5952f;
+            --bg-light: #f9f9f9;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-main);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .serif {
+            font-family: 'Shippori Mincho', serif;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, rgba(20, 30, 48, 0.85) 0%, rgba(36, 59, 85, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+            color: var(--white);
+            padding: 120px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            line-height: 1.4;
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p.sub-catch {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Global */
+        section {
+            padding: 80px 0;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        /* Content Blocks */
+        .content-box {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Lists */
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .check-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #d35400;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Benefits */
+        .benefit-item {
+            margin-bottom: 40px;
+        }
+
+        .benefit-item h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Curriculum */
+        .curriculum-part {
+            margin-bottom: 40px;
+        }
+
+        .curriculum-part h3 {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 1.2rem;
+        }
+
+        .curriculum-part dl {
+            margin: 0;
+            padding: 0 20px;
+        }
+
+        .curriculum-part dt {
+            font-weight: 700;
+            margin-top: 20px;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .curriculum-part dd {
+            margin: 5px 0 0 0;
+            color: var(--text-muted);
+        }
+
+        /* Profile */
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+
+        @media (max-width: 600px) {
+            .profile {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+        }
+
+        .profile-text h3 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+
+        /* Testimonials */
+        .testimonial {
+            background: #fff;
+            border-left: 4px solid var(--accent-color);
+            padding: 20px 30px;
+            margin-bottom: 20px;
+            font-style: italic;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Summary Table */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .summary-table th,
+        .summary-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .summary-table th {
+            text-align: left;
+            width: 30%;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(to right, #cf9d1a, #e6c25e);
+            color: var(--white);
+            text-decoration: none;
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(to right, #b58814, #cf9d1a);
+        }
+
+        .btn-wrapper {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Utility */
+        .text-bold {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ファーストビュー -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>花や風景を撮るその技術があれば、<br>大切な人の笑顔は、もっと輝く。</h1>
+            <p class="sub-catch">
+                風景写真のその先へ。<br>
+                あなたのカメラで「家族の歴史」を美しく残す、<br>
+                <strong>“専属カメラマン”</strong>という新しい写真人生を始めませんか？
+            </p>
+            <a href="#apply" class="cta-btn">＞＞ 一生の宝物を残す<br>「人物撮影」のコツを学ぶ ＜＜</a>
+        </div>
+    </header>
+
+    <!-- 導入・共感 -->
+    <section>
+        <div class="container fade-in">
+            <h2 class="section-title">「もっと綺麗に撮ってあげたい」<br>その想い、空回りしていませんか？</h2>
+
+            <div class="content-box">
+                <p>長年、美しい風景や季節の花々を追いかけてきたあなたへ。<br>シャッターを切る瞬間の喜びを、すでに十分ご存知のことでしょう。</p>
+                <p>ですが、もし少しでも以下のように感じているなら、今が新しい扉を開くチャンスです。</p>
+
+                <ul class="check-list">
+                    <li>最近、いつも同じような場所や構図ばかりで<strong>「マンネリ」</strong>を感じている</li>
+                    <li>せっかくの家族の記念写真が、なぜか<strong>「証明写真」のように硬く</strong>なってしまう</li>
+                    <li>動き回る孫を撮ると、気づけば<strong>「ブレた写真」</strong>の山になっている</li>
+                    <li>「あとで送るね」と言ったものの、<strong>自信を持って渡せる写真がない</strong></li>
+                    <li>良いカメラを持っているのに、<strong>家族から撮影を頼まれることがない</strong></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解決策 -->
+    <section style="background-color: var(--white);">
+        <div class="container fade-in">
+            <h2 class="section-title">大丈夫。風景写真の経験があるあなたなら、<br>少しの「コツ」で劇的に変わります。</h2>
+
+            <div class="content-box" style="border-top: 5px solid var(--accent-color);">
+                <p>「人物撮影は難しそう」「モデルがいないから練習できない」<br>そう敬遠されるお気持ちはよく分かります。</p>
+                <p>しかし、実はあなたがこれまで培ってきた<span class="text-bold">「光を見る目」</span>や<span
+                        class="text-bold">「構図を決める力」</span>は、そのまま「最高のポートレート」を撮るための最強の武器になるのです。</p>
+                <p>新しいカメラや機材は必要ありません。<br>必要なのは、センスではなく<span class="text-bold">「手順」</span>。</p>
+                <p>今の技術に、プロが現場でやっている「人物撮影のセオリー」を少し足すだけで、オート撮影では絶対に撮れない、ふんわり明るい「プロのような一枚」は誰でも撮れるようになります。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ベネフィット -->
+    <section>
+        <div class="container fade-in">
+            <h2 class="section-title" style="font-size: 1.8rem;">
+                目指すのは、大切な人たちの「一番近くにいる専属カメラマン」。<br>この講座を受講すると、3つの変化が手に入ります。</h2>
+
+            <div class="benefit-item content-box">
+                <h3>1. 風景撮影の経験を活かし、人物写真の「苦手意識」を克服できる</h3>
+                <p>あなたが持つ「構図のセンス」は、人物撮影でも強力な武器です。本講座で、人物特有の「ピント合わせ」や「明るさ調整」のコツさえ掴めば、自信を持ってレンズを「人」に向けられるようになります。</p>
+            </div>
+
+            <div class="benefit-item content-box">
+                <h3>2. 硬い「記念写真」を卒業し、部屋に飾りたくなる「作品」が撮れる</h3>
+                <p>生活感のある背景を整理するプロの視点や、自然な表情を引き出す「声かけ」を習得。ただ写っているだけでなく、その場の空気感まで写し撮った、雰囲気のある写真が撮れるようになります。</p>
+            </div>
+
+            <div class="benefit-item content-box">
+                <h3>3. 家族や仲間の専属カメラマンとして、「感謝される喜び」が手に入る</h3>
+                <p>「いいカメラ持ってるんだから、撮ってよ」と言われた時も、もうプレッシャーではありません。大切なイベント撮影を自信を持って引き受け、「あなたに撮ってもらえてよかった」と感謝される最高の役割が待っています。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- カリキュラム -->
+    <section style="background-color: var(--white);">
+        <div class="container fade-in">
+            <h2 class="section-title">独学ではたどり着けない「プロの視点」を最短でインストール。<br>人物撮影に特化した実践カリキュラム</h2>
+
+            <div class="curriculum-part">
+                <h3>■ Part 1：失敗しないための「準備」と「基本」</h3>
+                <dl>
+                    <dt>1. ポートレート撮影の全体像 〜風景撮影との違い〜</dt>
+                    <dd>「人は動く・話す」。お花撮影の技術を活かしながら、人物特有の「距離感」や「レンズ選び」の正解を学びます。もう「記念写真」とは言わせません。</dd>
+
+                    <dt>2. 手ブレ・被写体ブレを防ぐ「鉄板カメラ設定」</dt>
+                    <dd>動き回るお孫さんも、一瞬の表情も逃さない。プロが必ず設定している「シャッタースピード」と「オートフォーカス」の黄金ルールを伝授します。</dd>
+
+                    <dt>3. 一般の方をモデル並みに撮る「ポージングの魔法」</dt>
+                    <dd>「棒立ち」卒業！体の向きや手の位置を少し変えるだけで、相手を細く、若々しく見せるコツがあります。家族に「私ってこんなに綺麗だった？」と喜ばれる技術です。</dd>
+
+                    <dt>4. 逆光でも顔を明るく撮る「マニュアル露出」</dt>
+                    <dd>「背景は綺麗なのに、顔が真っ暗…」を防ぎます。カメラ任せでは撮れない、ふんわり明るい写真を撮るための「露出の操り方」です。</dd>
+                </dl>
+            </div>
+
+            <div class="curriculum-part">
+                <h3>■ Part 2：写真の質が劇的に上がる「光」と「声かけ」</h3>
+                <dl>
+                    <dt>5. 自然光を味方につける「光の見極め方」</dt>
+                    <dd>特別な照明機材は不要。窓からの光や木漏れ日など、身近にある光を使って、肌を美しく滑らかに写す「光の選び方」をマスターします。</dd>
+
+                    <dt>6. 最高の笑顔を引き出す「声かけ（コミュニケーション）術」</dt>
+                    <dd>実は技術以上に大切な「会話」のコツ。ガチガチに緊張している相手をリラックスさせ、自然な笑顔を引き出す「魔法の言葉」をお教えします。</dd>
+                </dl>
+            </div>
+
+            <div class="curriculum-part">
+                <h3>■ Part 3：【実践】屋外で「背景」を活かして撮る</h3>
+                <dl>
+                    <dt>7. 風景×人物の実践テクニック（ロケ撮影編）</dt>
+                    <dd>旅行先や公園で、美しい景色の中に人物を自然に溶け込ませる方法。「背景のボケ具合」や「整理の仕方」など、風景写真の経験が一番活きるステップです。</dd>
+                </dl>
+            </div>
+
+            <div class="curriculum-part">
+                <h3>■ Part 4：【実践】室内で「雰囲気」を活かして撮る</h3>
+                <dl>
+                    <dt>8. 暗い場所でも雰囲気たっぷりに撮る（室内撮影編）</dt>
+                    <dd>古民家や自宅など、光が少ない場所こそ腕の見せ所。その場の「空気感」を壊さずに、情緒あふれる一枚を残す方法を実践形式で学びます。</dd>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <!-- USP / サポート -->
+    <section>
+        <div class="container fade-in">
+            <h2 class="section-title">安心して学び続けられる、充実のサポート環境</h2>
+
+            <div class="content-box">
+                <ul class="check-list" style="margin-bottom: 0;">
+                    <li><strong>好きな時間に学べる動画講義</strong><br>何度も繰り返し視聴できるため、ご自身のペースで確実に技術を習得できます。</li>
+                    <li style="margin-top:20px;">
+                        <strong>プロ講師（中村路人）による直接の「写真添削」</strong><br>あなたの作品をプロが直接見てアドバイス。「褒めて伸ばす」的確な指導で、自己流の壁を突破できます。</li>
+                    <li style="margin-top:20px;">
+                        <strong>仲間と高め合える「月1回のZoom交流会」</strong><br>全国の同期とオンラインで繋がり、プロ講師に直接質問も可能。モチベーションを高く保てます。</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 受講生の声 -->
+    <section style="background-color: var(--white);">
+        <div class="container fade-in">
+            <h2 class="section-title">先行して学んだ方から、<br>喜びの声が届いています！</h2>
+            <p class="text-center text-muted" style="margin-top: -30px; margin-bottom: 30px;">（※同講師によるワークショップ参加者の声）</p>
+
+            <div class="testimonial">
+                「風景ばかり撮っていましたが、<strong>人物撮影のたのしさを知れました！</strong>」
+            </div>
+            <div class="testimonial">
+                「教わった設定と声かけを試したら、<strong>孫の写真が格段にレベルアップ</strong>して驚いています。」
+            </div>
+            <div class="testimonial">
+                「今まで独学でやってきたことが覆されて、まさに<strong>目からウロコ</strong>でした。」
+            </div>
+        </div>
+    </section>
+
+    <!-- 講師紹介 -->
+    <section>
+        <div class="container fade-in">
+            <h2 class="section-title">講師紹介</h2>
+
+            <div class="profile">
+                <img src="https://images.unsplash.com/photo-1552508744-1696d4464960?q=80&w=400&auto=format&fit=crop"
+                    alt="中村 路人" class="profile-img">
+                <div class="profile-text">
+                    <h3>中村 路人（Nakamura Michito）</h3>
+                    <p>公益社団法人日本写真家協会（JPS)会員。<br>集英社や小学館などの女性誌を中心に出版物、モデルポートレート、ファッション、ビューティーなど女優、タレントなど、著名人の撮影多数。人物の魅力を引き出す撮影技術と、親しみやすい指導に定評がある。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 概要・申込 -->
+    <section id="apply" style="background-color: var(--white);">
+        <div class="container fade-in">
+            <h2 class="section-title">講座概要・お申し込み</h2>
+
+            <div class="content-box">
+                <table class="summary-table">
+                    <tr>
+                        <th>講座名</th>
+                        <td>写真実践講座 ～人物・ポートレート～</td>
+                    </tr>
+                    <tr>
+                        <th>サポート担当講師</th>
+                        <td>中村 路人</td>
+                    </tr>
+                    <tr>
+                        <th>開催期間</th>
+                        <td>1日から翌々月15日まで（3月・9月スタートの年2回）</td>
+                    </tr>
+                    <tr>
+                        <th>参加費用</th>
+                        <td><strong>19,800円</strong>（税別）</td>
+                    </tr>
+                    <tr>
+                        <th>定員</th>
+                        <td>20名</td>
+                    </tr>
+                </table>
+
+                <div class="text-center" style="margin-top: 40px;">
+                    <p style="font-size: 1.1rem; line-height: 2;">
+                        記憶は薄れても、あなたが撮った写真は色褪せません。<br>スマホでは残せない「空気感」や「関係性」まで写し撮り、未来の家族へのラブレターを残しませんか？<br><br>あなたのご参加を、心よりお待ちしております。
+                    </p>
+                </div>
+
+                <div class="btn-wrapper">
+                    <a href="#" class="cta-btn">＞＞ 「写真実践講座 ～人物・ポートレート～」に申し込む ＜＜</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer
+        style="background: var(--primary-color); color: rgba(255,255,255,0.7); text-align: center; padding: 30px; font-size: 0.9rem;">
+        <p>&copy; 2026 写真実践講座 All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // スクロール時のフェードインアニメーション
+        document.addEventListener("DOMContentLoaded", function () {
+            const elements = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+
+</html>
